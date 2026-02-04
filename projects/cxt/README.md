@@ -2,6 +2,8 @@
 
 CXT is a simple command-line text analysis tool written in C. It allows users to analyze text files for various statistics such as word frequencies, line counts, and most common words. It also supports saving analysis reports and loading previously saved reports.
 
+**Part of the CLEARNING project** - A collection of C learning projects. See the [main README](../../README.md) for more information about the overall project.
+
 ## Features
 
 - **Word Frequency Analysis**: Counts the frequency of each unique word in the text, excluding common stop words.
