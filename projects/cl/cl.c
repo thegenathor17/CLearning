@@ -8,6 +8,9 @@ void interpreter(int argc, char** argv){
         printf("CL version 1.0.0. Author: Nahum Naranjo \n");
         return;
     }
+    if(argv[1] == NULL){
+        return;
+    }
     if (argv[1] != NULL && (strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "--version") == 0)) {
         printf("CL version 1.0.0. Author: Nahum Naranjo \n");
         return;
@@ -25,7 +28,7 @@ void interpreter(int argc, char** argv){
     }
 
     // Exec
-    if(argv[1] != NULL && (strcmp(argv[1], "exec") == 0)){
+    if(argv[1] != NULL && (strcmp(argv[1], "exec") == 0 || strcmp(argv[1], "-e") == 0)){
         if(argv[2] != NULL){
             printf("Interpreting tool: %s\n", argv[2]);        
         } 
@@ -44,6 +47,7 @@ void interpreter(int argc, char** argv){
         return;
     }
     // Unknown option
+    // TODO: Add cl install to install libraries to projects
     printf("Unknown option: %s\n", argv[1]);
     printf("Use -h or --help for usage information.\n");
     return;
