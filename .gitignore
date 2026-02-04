@@ -1,0 +1,79 @@
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+install_manifest.txt
+cmake_install.cmake.tmp8c2c3
+cmake_install.cmake.tmpbaf8a
+cmake_install.cmake.tmp112ce
+CMakeCache.txt.tmp99151
+compile_commands.json
+compile_commands.json.tmp7d18c
+CTestTestfile.cmake
+_deps/
+
+# Ninja build files
+build.ninja
+build.ninja.tmp70f76
+rules.ninja
+.ninja_deps
+.ninja_log
+.ninja_log.recompact
+.ninja_log.restat
+.ninja_lock
+
+# Build directories
+build/
+Build/
+out/
+bin/
+lib/
+
+# Compiled binaries
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+
+# Object files
+*.o
+*.obj
+*.lo
+*.slo
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# IDE files
+.vs/
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Visual Studio files
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.sln
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Temporary files
+*.tmp
+*.bak
+*.log
+*.exe
