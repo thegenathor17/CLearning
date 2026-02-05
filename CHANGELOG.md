@@ -83,5 +83,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dependency and compatibility information
 - Comprehensive command reference (DOCUMENTATION.md)
 
+## [1.0.1] - 2026-02-05
+### Chages and additions
+### Common Library
+- File finder implementation started:
+  - For now, due to this being just a pre-realease, its just the functions I need right now.
+
+### Hotfixes
+- Installer missing folders added
+- Setup for CBA development implemented
+
+### Documentation
+- Diary added for day by day thoughts during development.
+- Roadmap addded for future plans
+
+
+
 ### Author
 - Developed by Nahum Naranjo as a C learning project

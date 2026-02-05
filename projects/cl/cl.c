@@ -48,6 +48,7 @@ void interpreter(int argc, char** argv){
     }
     // Unknown option
     // TODO: Add cl install to install libraries to projects
+    // TODO: Add cba to build CBA projects
     printf("Unknown option: %s\n", argv[1]);
     printf("Use -h or --help for usage information.\n");
     return;
