@@ -20,7 +20,7 @@ cl [options] [command]
 
 - `-v, --version`: Shows version information.
 - `-h, --help`: Shows the help menu.
-- `exec [tool]`: Executes a specific tool.
+- `exec, -e [tool]`: Executes a specific tool.
 
 ### Usage Examples
 
@@ -41,7 +41,7 @@ cl [options] [command]
 
 4. **Execute CXT**:
    ```bash
-   cl exec cxt
+   cl -e cxt
    ```
 
 ## Building

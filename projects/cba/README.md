@@ -1,10 +1,10 @@
-# CXT - Text Analysis Tool
+# CBA - A build assistant for lost developers
 
-CXT is a simple command-line text analysis tool written in C. It allows users to analyze text files for various statistics such as word frequencies, line counts, and most common words. It also supports saving analysis reports and loading previously saved reports.
+CBA is a simple command-line build assist tool written in C. It allows users to automatically write CMake files and build. It only supports C code built with CMake Ninja but more options will be added as the project continues its development.
 
 **Part of the CLEARNING project** - A collection of C learning projects. See the [main README](../../README.md) for more information about the overall project.
 
-## Features
+## Features (TODO)
 
 - **Word Frequency Analysis**: Counts the frequency of each unique word in the text, excluding common stop words.
 - **Line Count**: Counts the number of lines in the file.
@@ -17,7 +17,7 @@ CXT is a simple command-line text analysis tool written in C. It allows users to
 
 ## Usage
 
-1. Run the program: `./cxt.exe`
+1. Run the program: `./cba.exe`
 2. Enter the path to the text file you want to analyze (or a saved report file starting with "analysis_report_").
 3. Use the following commands in analysis mode:
    - `info -l`: Display number of lines.
@@ -72,4 +72,4 @@ Analysis results can be saved as report files with timestamps. These files can b
 
 ## Version
 
-CXT - Text Analyzer v1.0.0
+CBA - Text Analyzer v1.0.0
