@@ -24,10 +24,13 @@ For this update (which I have about half an hour to code) I'll try to set the ba
 
 For the first files I made, I must say, I really should work on ui.c, it reapeats in every new project that needs it, I know it's hard to make an universal one. Was thinking about C#'s override feature but discarded it after noticing it'd be the same, I'd override it literally ALL the times I wanna make a personalized UI so I'll keep doing it the way I'm doing so until I come up with a better plan.
 
-As I kept working I found out the past bash commands were not good enough, this is the idea now:  
+As I kept working I found out the past bash commands were not good enough, they were pretty repetitive and complicated for things I could automate and make easier for the user so this is the idea now:  
 ```bash
     build # Will look for cba.build, with all the info it needs to run
     prepare # If it doesn't find said file, you should run this one
     config # Pretty much self-explanatory
 ```
 If build is run without a cba.build file it'll ask the user for permission to make another one, assuming its the root directory of the project and writing with the options saved in cba directory in C:/InCGames/CL/configs
+
+### 1.0.2 update
+Another minor patch for the installer. For now, it's just a minor adjustment on what files and where does it make it. Before, the config files weren't generated at all (wasn't necessary), now they're located at "C:\InCGames\cl\configs" on the user's pc. 

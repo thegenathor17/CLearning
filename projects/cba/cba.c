@@ -5,7 +5,7 @@ void* Build(){
     char option[10];
     FILE *fp;
     BuildInfo buildInfo;
-    fp = fopen("\\cba.build", "r");
+    fp = fopen("cba.build", "r");
     if(fp == NULL){
         printf("Error: Could not open build file.\n");
         printf("Make sure that the .build file is in the working directory of the project.\n");
@@ -51,8 +51,8 @@ void Parser(FILE* file, BuildInfo* buildInfo) {
         value++;        // Move past '='
         
         // Trim whitespace
-        key = trim_whitespace(key);
-        value = trim_whitespace(value);
+        key = trimWhitespace(key);
+        value = trimWhitespace(value);
 
         if(strcmp(key, "version") == 0){
             strcpy(buildInfo->version, value);
@@ -63,8 +63,26 @@ void Parser(FILE* file, BuildInfo* buildInfo) {
         } else if(strcmp(key, "ninjaMinVersion") == 0){
             strcpy(buildInfo->ninjaMinVersion, value);
         }
-        key = strtok(NULL, "=");
     }
+}
+
+char* trimWhitespace(char* str) {
+    char* end;
+
+    // Trim leading space
+    while(isspace((unsigned char)*str)) str++;
+
+    if(*str == 0)  // All spaces?
+        return str;
+
+    // Trim trailing space
+    end = str + strlen(str) - 1;
+    while(end > str && isspace((unsigned char)*end)) end--;
+
+    // Write new null terminator
+    *(end+1) = 0;
+
+    return str;
 }
 
 
