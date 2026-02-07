@@ -17,7 +17,8 @@ void* Build(){
         scanf("%s", option);
         if(strcmp(option, "Y") == 0 || strcmp(option, "y") == 0){
             printf("Preparing build environment...\n");
-            lookForRootFiles("configs\\cba.build");
+            fp = lookForRootFiles("configs\\cba.build");
+            Parser(fp, &buildInfo);
             prepare(&buildInfo);
             printf("Build environment prepared.\n");
             return NULL;
@@ -62,6 +63,8 @@ void Parser(FILE* file, BuildInfo* buildInfo) {
             strcpy(buildInfo->cmakeMinVersion, value);
         } else if(strcmp(key, "ninjaMinVersion") == 0){
             strcpy(buildInfo->ninjaMinVersion, value);
+        }   else if(strcmp(key, "output") == 0){
+            strcpy(buildInfo->output, value);
         }
     }
 }
@@ -86,6 +89,83 @@ char* trimWhitespace(char* str) {
 }
 
 
-void* prepare(BuildInfo* buildInfo){
+void prepare(BuildInfo* buildInfo){
+    if(system("cmake --version > /dev/null 2>&1") != 0){
+        printf("Error: CMake is not installed or not in PATH.\n");
+        return;
+    }
+    if(system("ninja --version > /dev/null 2>&1") != 0){
+        printf("Error: Ninja is not installed or not in PATH.\n");
+        return;
+    }
+    FILE *fp;
+    fp = fopen("CMakeLists.txt", "w");
+    if(fp == NULL){
+        printf("Error: Could not create CMakeLists.txt file.\n");
+        return;
+    }
+    // Main CMakeLists.txt content
+    fprintf(fp, "cmake_minimum_required(VERSION %s)\n", buildInfo->cmakeMinVersion);
+    fprintf(fp, "project(%s VERSION %s)\n", buildInfo->name, buildInfo->version);
+    fprintf(fp, "set(CMAKE_CXX_STANDARD 11)\n");
+    fprintf(fp, "set(CMAKE_CXX_STANDARD_REQUIRED True)\n");
+    fprintf(fp, "set(CMAKE_MAKE_PROGRAM ninja)\n");
+    fprintf(fp, "file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS \"*.c\")\n");
+    fprintf(fp, "file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS \"*.h\")\n");
+    fprintf(fp, "add_executable(%s ${SOURCES} ${HEADERS})\n", buildInfo->name);
+    char* directory = malloc(1024 * sizeof(char));
+    _getcwd(directory, sizeof(directory));
+    char* directories = ListDirectories(directory);
+    char dirArray[1024][256];  // Assuming max 1024 directories, each up to 255 chars
+    size_t dirCount = 0;
+    if(directories != NULL){
+        char* dir = strtok(directories, "\n");
+        while(dir != NULL){
+            fprintf(fp, "add_subdirectory(%s)\n", dir);
+            strcpy(dirArray[dirCount], dir);
+            dirCount++;
+            dir = strtok(NULL, "\n");
+        }
+        free(directories);
+        free(directory);
+    }
+    fclose(fp);
+    for (int i = 0; i < dirCount; i++) {
+        char subDirPath[512];
+        if(
+            strcmp(dirArray[i], "build") == 0 || 
+            strcmp(dirArray[i], ".git") == 0 || 
+            strcmp(dirArray[i], ".vscode") == 0 || 
+            strcmp(dirArray[i], ".github") == 0 || 
+            strcmp(dirArray[i], ".idea") == 0 ||
+            strcmp(dirArray[i], "configs") == 0 ||
+            strcmp(dirArray[i], "docs") == 0 ||
+            strcmp(dirArray[i], "tests") == 0 ||
+            strcmp(dirArray[i], ".cbaignore") == 0
+        ) continue;
+        //prepares CMakeLists.txt in each subdirectory
+        // common folder is treated differently
+        if(strcmp(dirArray[i], "common") == 0) {
+            fprintf(fp, "file(GLOB COMMON_SOURCES \"common/*.c\")\n");
+            fprintf(fp, "add_library(common STATIC ${COMMON_SOURCES})\n");
+            fprintf(fp, "target_include_directories(common PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})\n");
+            fprintf(fp, "set_target_properties(common PROPERTIES C_STANDARD 11)\n");
+            fclose(fp);
+            continue;
+        }
+        snprintf(subDirPath, sizeof(subDirPath), "%s\\%s", directory, dirArray[i]);
+        fp = fopen(subDirPath, "w");
+        if(fp == NULL){
+            printf("Error: Could not create CMakeLists.txt in %s\n", dirArray[i]);
+            continue;
+        }
+        fprintf(fp, "file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS \"*.c\")\n");
+        fprintf(fp, "file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS \"*.h\")\n");
+        char istr[10];
+        sprintf(istr, "_%d", i);
+        fprintf(fp, "target_sources(%s PRIVATE ${SOURCES} ${HEADERS})\n", strcat(buildInfo->name, istr));
+        fprintf(fp, "set_target_libraries(%s PRIVATE common)\n", buildInfo->name);
 
+        fclose(fp);
+    }
 }

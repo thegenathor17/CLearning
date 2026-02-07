@@ -19,6 +19,7 @@ Hello there! it's the first time I write it from the beginning of the period of 
 ```
 Anyways, I'll put them in the documentation once I finish it. For the moment, those are the only ones I have planned so far.  
 
+---
 ### 1.0.1 update :D
 For this update (which I have about half an hour to code) I'll try to set the base for this new tool in the stack, wish me luck!
 
@@ -32,5 +33,54 @@ As I kept working I found out the past bash commands were not good enough, they 
 ```
 If build is run without a cba.build file it'll ask the user for permission to make another one, assuming its the root directory of the project and writing with the options saved in cba directory in C:/InCGames/CL/configs
 
-### 1.0.2 update
+---
+
 Another minor patch for the installer. For now, it's just a minor adjustment on what files and where does it make it. Before, the config files weren't generated at all (wasn't necessary), now they're located at "C:\InCGames\cl\configs" on the user's pc. 
+
+Also, I found out I left cba.c incomplete last time I touched it, started to work in that
+
+I honestly thought it'd be harder, ofc it's way simpler than i want it to be and i haven't tested a thing but i'm pretty sure it'll work just fine, for now, CBA is half way to it's first usable release (which will be 1.1.0 of the main program). For now, when you first run the build command, it starts doing magic, looking for a cba.build file (if it doesn't, it'll look for cba.config in the same folder as the last time i said it). then, it'll write this code to the main CMakelists.txt
+
+```cmake
+    cmake_minimum_required(VERSION %s) // %s is the variable that
+    project(%s VERSION %s)
+    set(CMAKE_CXX_STANDARD 11)
+    set(CMAKE_CXX_STANDARD_REQUIRED True)
+    set(CMAKE_MAKE_PROGRAM ninja)
+    file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS "*.c")
+    file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS "*.h")
+    add_executable(%s ${SOURCES} ${HEADERS})
+    set_target_libraries(%s PRIVATE common)
+```
+
+then, it'll look for subdirectories, making a basic CMakelists.txt for each one, being:
+```cmake
+    file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS "*.c")
+    file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS "*.h")
+    target_sources(%s PRIVATE ${SOURCES} ${HEADERS})
+    set_target_libraries(%s PRIVATE common)
+```
+
+if the subdirectory name is:
+- ".cbaignore"
+- "tests"
+- "docs"
+- "configs"
+- ".idea"
+- ".github"
+- ".vscode"
+- ".git"
+- "build"
+
+it'll automatically ignore it  
+if the directory name is "common", then cba will make this CMakelists.txt:
+```cmake
+    file(GLOB COMMON_SOURCES "common/*.c")
+    add_library(common STATIC ${COMMON_SOURCES})
+    target_include_directories(common PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+    set_target_properties(common PROPERTIES C_STANDARD 11)
+```
+
+And that's it, now the user should be able to run either "ninja", "cmake .." or "cba build" to get the .exe's
+
+For now and due to my lack of experience with cmake, it'll be based completely on my files so it won't have that much of compatibility but it'll improve with time. This was an easy tool to develop tbh, see you tomorrow!

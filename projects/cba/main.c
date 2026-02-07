@@ -6,7 +6,7 @@
 int main(){
     clearConsole();
     printf("Welcome to CBA!\n");
-    void* ptrToOption = 1;
+    void* ptrToOption = NULL;
     while(ptrToOption != 0){
         // Main loop
         ptrToOption = BuildUI();
