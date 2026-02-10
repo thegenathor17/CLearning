@@ -1,133 +1,130 @@
-# CLEARNING Project Roadmap
+# Changelog
 
-For future releases I'm planning to add:
+All notable changes to this project will be documented in this file.
 
-## 1. CL Package Manager
-It's kinda hard to do and I know it (have no idea) but I think I'll be alright. Basically, I want to add the typical "cl install [package]" so you can install CL and then just add a specific library to your project root instead of doing it by hand. For example, CMap would work really well with this, I had headaches trying to add it to chocolatey (gave up about five minutes later when I decided to do one on my own).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-**Goals:**
-- `cl install [package]` command
-- Automatic library integration into projects
-- Local package repository
-- Version management
-- Dependency resolution
+## [1.0.0] - 2026-02-03
 
-## 2. CMNGR (C Configuration Manager)
-Basically, another CL DLC to configure all the project's libraries in one central configuration. I'm thinking of having configuration files, something like "cxt.config" or so, it won't be that necessary but it'll be fun to code.
+### Added
 
-**Goals:**
-- Centralized configuration system
-- Project-specific `.config` files
-- Tool integration (CBA, CXT, etc.)
-- Configuration validation
-- Migration tools between versions
+#### CL (Command-Line Launcher)
+- Command-line argument parsing for options and commands
+- Version information display (`-v`, `--version`)
+- Help menu display (`-h`, `--help`)
+- Tool execution capability (`exec hub`, `exec cxt`)
+- Error handling for unknown options
+- Windows system call integration for launching executables
 
-## 3. CUTEST (C Unit Test)
-Basically, just another tool for doing tests just like CUnit or Check. I don't really know what will I do here but (I hope) it'll be fun though. Honestly, the name was so good I couldn't help but consider it.
+#### HUB (Menu Interface)
+- Interactive console menu system
+- Numbered option selection (1: Go to CXT, 2: Exit)
+- Console screen clearing between menu displays
+- Error handling for invalid menu selections
+- Integration with CXT tool launching
 
-**Goals:**
-- Simple test declaration syntax
-- Assertion library
-- Test discovery and execution
-- Code coverage reporting
-- Integration with CBA build system
+#### CXT (Text Analysis Tool)
+- Text file analysis with multiple statistics:
+  - Line count (`info -l`)
+  - Word count (`info -w`)
+  - Most common word identification (`info -m`)
+  - Complete word frequency analysis (`info -f`)
+  - All statistics display (`info -a`)
+- Stop word filtering (common English words like "the", "a", "is")
+- Text cleaning (punctuation removal, quote handling)
+- Report saving functionality with timestamped filenames
+- Report loading from saved analysis files
+- Interactive command-line interface with help system
+- File path input validation
+- Memory management for dynamic word tracking
+- Windows-specific console operations
 
-## 4. CFM (C File Manager)
-Another DLC for cl.c (I think it's my favorite part of the project), this one will be just as good as Windows built-in file manager (just joking, obviously better). I'm planning to do it for maybe the 2.0.0 or so, it's a bigger project than it seems.
+#### Common Library
+- Map data structure implementation:
+  - Key-value storage using void pointers
+  - FindKey() function for key index lookup
+  - FindValue() function for value index lookup
+  - ExistKey() function for key existence check
+  - ExistValue() function for value existence check
+- Screen management utilities:
+  - clearConsole() for console screen clearing
+  - Stop() for execution pause with user input
+- Static library compilation for shared usage
 
-**Goals:**
-- Project structure analysis
-- Dependency visualization
-- Smart file operations (rename with reference updates)
-- Refactoring tools
-- Integration with version control
+#### Build System
+- CMake-based build configuration (minimum version 3.10)
+- Ninja build generator support
+- C11 standard compliance
+- GCC/MinGW compiler support on Windows
+- Automatic header inclusion for common library
+- Executable generation in build directory
 
-## 5. CDOCGEN (C Document Generator)
-Just a garbage file generator, maybe you wanna make a 3 GB file worth of pure chaos, just like a very long keyboard smash.
+#### Project Structure
+- Modular project organization with common library
+- Cross-project dependencies management
+- Comprehensive documentation (README files for each component)
+- Windows compatibility focus
 
-**Goals:**
-- Chaos file generation (keyboard smash style)
-- Test data generation (CSV, JSON, etc.)
-- Code documentation generation
-- Pattern-based file creation
-- Performance testing utilities
+### Technical Details
+- Pure C implementation without external dependencies
+- Standard C library usage only
+- Windows API integration for console operations
+- Dynamic memory allocation for data structures
+- File I/O operations for text analysis and report management
+- Command-line interface design
+- Modular code architecture with separate header files
 
----
+### Documentation
+- Main project README with build and usage instructions
+- Component-specific README files (CL, HUB, CXT, Common)
+- Feature descriptions and API documentation
+- Build system configuration details
+- Dependency and compatibility information
+- Comprehensive command reference (DOCUMENTATION.md)
 
-## Development Timeline
+## [1.0.1] - 2026-02-05
 
-### Short-term (Next 2-3 Months)
-1. **CBA Improvements & Bug Fixes**
-   - Refactor folder checking and CMake generation
-   - Add .config file support
-   - Improve error handling and user feedback
+### Chages and additions
 
-2. **CL Overhaul**
-   - Enhance command parsing and execution
-   - Add more built-in commands
-   - Improve help system and documentation
+### Common Library
+- File finder implementation started:
+  - For now, due to this being just a pre-realease, its just the functions I need right now.
 
-### Medium-term (3-6 Months)
-1. **CBA Out of Beta**
-   - Full integration with HUB
-   - Enhanced configuration options
-   - Cross-platform compatibility improvements
+### Hotfixes
+- Installer missing folders added
+- Setup for CBA development implemented
 
-2. **CL Package Manager Foundation**
-   - Basic package installation system
-   - Local package management
-   - Integration with existing tools
+### Documentation
+- Diary added for day by day thoughts during development.
+- Roadmap addded for future plans
 
-### Long-term (6+ Months)
-1. **CUTEST Development**
-   - Test framework implementation
-   - Integration with CBA
-   - Documentation and examples
+## [1.1.0] - 2026-02-06
+### Changes and additions
+### Common library
+- File finder updated:
+  - lookForRootFiles() and ListDirectories() added for easier file management  
 
-2. **Configuration Manager**
-   - Unified configuration system
-   - Tool integration
-   - Migration utilities
+### Added
+- **CBA entered beta:**
+  - **Auto CMakelists.txt:** CBA automatically detects every folder and for c files, adding them to their own CMakelists and implementing it all into a main CMakelists.txt file.
+  - **Library support:** Wanna code your own libraries for your C projects? add them to /common or /libraries and let CBA do the rest.
+  - **Default settings:** When CBA can't find a cba.build file it'll use cba.config to make one from scratch, you can't modify it for now, stay tuned for next update ;D  
+(For now, it's only compatible with C projects and a specific project structure, check [cba.md](./projects/cba/README.md) for more detailed information.)
 
-3. **File Manager & Document Generator**
-   - Advanced file operations
-   - Project analysis tools
-   - Various document generation capabilities
+### Technical Details
+- CBA **WILL NOT WORK** if you don't have CMake and Ninja versions (min ver in [cba.md](./projects/cba/README.md))  
+### Hotfixes
+- Installer missing files added
+- Added .config files, useless for the moment.
 
----
+## [1.1.1] - 2026-02-09
+### Documentation
+- Fixed ALL README.md files
+- Updated CHANGELOG.md
+- Remade [cba.md](./projects/cba/README.md)
+- Usual DIARY.md entries  
+- Made some hotfixes
 
-## Current Focus Areas
-
-### Immediate Tasks (v1.2.x)
-- **CBA Refactoring:** Fix folder checking issues and improve CMake generation
-- **Documentation:** Update all README files and changelogs
-- **Installer Updates:** Ensure installer includes all necessary files
-- **Bug Fixes:** Address issues in lookForRootFiles.c and cba.c
-
-### Next Release (v1.3.0)
-- Enhanced CBA functionality with .config file support
-- Improved CL command structure
-- Better error handling and user feedback
-- More comprehensive documentation
-
----
-
-## Notes
-- **Weekly Development Goal:** Add a new tool or major update each week
-- **Cross-Platform:** Focus on Windows compatibility with eventual Linux/Mac support
-- **Community Input:** Features may change based on user feedback and needs
-- **Learning Focus:** The project serves as a learning experience in C development
-
----
-
-## Success Metrics
-- Reduce project setup time for C developers
-- Provide useful tools that integrate well together
-- Maintain clean, readable, and maintainable code
-- Support both novice and experienced C developers
-
----
-
-*Last updated: 2026-02-09*  
-*Author: Nahum Naranjo*  
-*Project Status: Active Development*
+### Author
+- Developed by Nahum Naranjo as a C learning project

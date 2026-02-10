@@ -1,350 +1,133 @@
 # CLEARNING Project Roadmap
 
-## Overview
-This roadmap outlines the planned features and enhancements for future releases of the CLEARNING project. Each component extends the existing ecosystem with specialized tools for C development workflow optimization.
+For future releases I'm planning to add:
 
----
+## 1. CL Package Manager
+It's kinda hard to do and I know it (have no idea) but I think I'll be alright. Basically, I want to add the typical "cl install [package]" so you can install CL and then just add a specific library to your project root instead of doing it by hand. For example, CMap would work really well with this, I had headaches trying to add it to chocolatey (gave up about five minutes later when I decided to do one on my own).
 
-## 1. CL Package Manager (CPM)
+**Goals:**
+- `cl install [package]` command
+- Automatic library integration into projects
+- Local package repository
+- Version management
+- Dependency resolution
 
-### Status: *Planning Phase*
-### Target Release: v1.3.0
+## 2. CMNGR (C Configuration Manager)
+Basically, another CL DLC to configure all the project's libraries in one central configuration. I'm thinking of having configuration files, something like "cxt.cconfig" (intentional double c) or so, it won't be that necessary but it'll be fun to code.
 
-### Core Features
-- **Package Installation Command**: `cl install [package]` for seamless library integration
-- **Dependency Resolution**: Automatic handling of library dependencies
-- **Version Management**: Support for specific package versions
-- **Local Repository**: Local cache for frequently used packages
-- **Integration with CBA**: Automatic addition to project CMakeLists.txt
+**Goals:**
+- Centralized configuration system
+- Project-specific `.cconfig` files
+- Tool integration (CBA, CXT, etc.)
+- Configuration validation
+- Migration tools between versions
 
-### Technical Goals
-- Cross-platform package management system
-- Support for both public and private repositories
-- Conflict resolution for library dependencies
-- Verification of package integrity (checksums)
-- Fallback mechanisms for offline development
+## 3. CUTEST (C Unit Test)
+Basically, just another tool for doing tests just like CUnit or Check. I don't really know what will I do here but (I hope) it'll be fun though. Honestly, the name was so good I couldn't help but consider it.
 
-### Example Usage
-```bash
-# Install a specific library
-cl install cmap
+**Goals:**
+- Simple test declaration syntax
+- Assertion library
+- Test discovery and execution
+- Code coverage reporting
+- Integration with CBA build system
 
-# Install with version specification
-cl install cmap@2.1.0
+## 4. CFM (C File Manager)
+Another DLC for cl.c (I think it's my favorite part of the project), this one will be just as good as Windows built-in file manager (just joking, obviously better). I'm planning to do it for maybe the 2.0.0 or so, it's a bigger project than it seems.
 
-# List installed packages
-cl package list
+**Goals:**
+- Project structure analysis
+- Dependency visualization
+- Smart file operations (rename with reference updates)
+- Refactoring tools
+- Integration with version control
 
-# Update all packages
-cl package update
-```
+## 5. CDOCGEN (C Document Generator)
+Just a garbage file generator, maybe you wanna make a 3 GB file worth of pure chaos, just like a very long keyboard smash.
 
-### Challenges to Address
-- Integration with existing build systems
-- Cross-platform compatibility
-- Security considerations for package sources
-- Memory-efficient package handling
-
----
-
-## 2. CMNGR - C Configuration Manager
-
-### Status: *Design Phase*
-### Target Release: v1.6.0
-
-### Core Features
-- **Unified Configuration System**: Centralized configuration for all CLEARNING tools
-- **Project-specific Settings**: Per-project configuration files (`.cconfig`)
-- **Tool Integration**: Seamless integration with CBA, CXT, and other tools
-- **Environment Detection**: Automatic detection of development environments
-
-### Configuration File Format
-```yaml
-# Example .cconfig file
-project:
-  name: "my_project"
-  version: "1.0.0"
-  author: "Developer Name"
-
-tools:
-  cba:
-    build_type: "Release"
-    compiler: "gcc"
-    c_standard: "c17"
-  
-  cxt:
-    stop_words: "custom_stop_words.txt"
-    report_location: "./reports"
-  
-  cpm:
-    repositories:
-      - "https://repo.clearning.org"
-      - "./local_packages"
-```
-
-### Key Features
-- **Validation System**: Syntax and semantic validation of configuration
-- **Migration Tools**: Automatic migration between configuration versions
-- **Template System**: Pre-made configuration templates
-- **CLI Interface**: `cl config [command]` for configuration management
-
-### Integration Points
-- CBA build system configuration
-- CXT analysis preferences
-- Package manager repositories
-- Test framework settings
-
----
-
-## 3. CUTEST - C Unit Testing Framework
-
-### Status: *Concept Phase*
-### Target Release: v1.4.0
-
-### Core Philosophy
-"C Unit Test" with a focus on being developer-friendly and intuitive ("most cute")
-
-### Feature Set
-- **Simple Test Declaration**: Minimal boilerplate for test creation
-- **Assertion Library**: Comprehensive assertion macros
-- **Test Discovery**: Automatic discovery of test functions
-- **Parallel Execution**: Support for parallel test execution
-- **Code Coverage**: Built-in code coverage reporting
-- **Mocking Framework**: Simple mocking capabilities
-
-### Example Test File
-```c
-#include "cutest.h"
-
-TEST_SUITE(MathOperations) {
-    
-    TEST_CASE(Addition) {
-        ASSERT_EQUAL(2 + 2, 4);
-        ASSERT_NOT_EQUAL(5 + 3, 7);
-    }
-    
-    TEST_CASE(Multiplication) {
-        ASSERT_EQUAL(3 * 4, 12);
-        ASSERT_LESS_THAN(2 * 2, 5);
-    }
-}
-
-TEST_SUITE(StringOperations) {
-    
-    TEST_CASE(Concatenation) {
-        char result[20];
-        str_concat(result, "Hello", "World");
-        ASSERT_STRING_EQUAL(result, "HelloWorld");
-    }
-}
-```
-
-### CLI Interface
-```bash
-# Run all tests
-cutest run
-
-# Run specific test suite
-cutest run MathOperations
-
-# Run with coverage reporting
-cutest run --coverage
-
-# Generate HTML report
-cutest report --format=html
-```
-
-### Integration Features
-- Seamless integration with CBA build system
-- Continuous Integration support
-- IDE integration (VS Code, CLion, etc.)
-- Performance benchmarking capabilities
-
----
-
-## 4. CFM - C File Manager
-
-### Status: *Future Consideration*
-### Target Release: v1.6.0
-
-### Vision Statement
-A powerful, intuitive file management system designed specifically for C developers, surpassing basic OS file managers in functionality relevant to software development.
-
-### Core Capabilities
-
-#### Project Structure Analysis
-- **Dependency Visualization**: Graph-based display of file dependencies
-- **Code Metrics**: File-level statistics (complexity, size, etc.)
-- **Architecture View**: High-level project architecture visualization
-
-#### Advanced File Operations
-- **Smart Renaming**: Rename files with automatic reference updates
-- **Refactoring Tools**: Move/restructure files with dependency resolution
-- **Template Generation**: Quick file generation from templates
-
-#### Integration Features
-- **Version Control Integration**: Git status display and operations
-- **Build System Awareness**: Understanding of CMake/Makefile structures
-- **Cross-project Navigation**: Easy navigation between related projects
-
-### Example Commands
-```bash
-# Navigate project structure
-cfm browse
-
-# Analyze file dependencies
-cfm deps main.c
-
-# Refactor - move file with dependency updates
-cfm move src/old.c src/new.c --update-references
-
-# Generate new module with template
-cfm generate module user_auth --template=library
-```
-
-### UI Concepts
-- Terminal-based TUI with ncurses
-- Dual-pane interface for file operations
-- Color-coded file status (modified, untracked, etc.)
-- Quick access to common operations
-
----
-
-## 5. CDOCGEN - C Document Generator
-
-### Status: *Experimental Idea*
-### Target Release: v1.8.0
-
-### Purpose
-Generate various types of document files for testing, demonstration, or data processing purposes.
-
-### Document Types
-
-#### 1. **Chaos Files** (Keyboard Smash Generator)
-```bash
-# Generate a 1GB file of random characters
-cdocgen chaos --size=1GB --output=chaos.txt
-
-# Generate structured chaos (paragraphs, words)
-cdocgen chaos --structured --paragraphs=1000
-```
-
-#### 2. **Test Data Files**
-```bash
-# Generate CSV test data
-cdocgen csv --rows=10000 --columns=10 --output=data.csv
-
-# Generate JSON test data
-cdocgen json --objects=500 --depth=3 --output=test.json
-```
-
-#### 3. **Code Documentation**
-```bash
-# Generate API documentation from source
-cdocgen docs --input=src/ --format=markdown --output=API.md
-
-# Generate dependency diagrams
-cdocgen deps --input=main.c --format=graphviz --output=deps.dot
-```
-
-### Advanced Features
-- **Pattern-based Generation**: Create files following specific patterns
-- **Realistic Data**: Optionally generate realistic-looking data
-- **Performance Testing**: Generate files for I/O performance testing
-- **Encoding Support**: Multiple character encodings (UTF-8, ASCII, etc.)
-
-### Use Cases
-1. **Stress Testing**: Generate large files for system testing
-2. **Demo Data**: Create sample data for demonstrations
-3. **Template Generation**: Generate project templates
-4. **Education**: Create example files for teaching purposes
+**Goals:**
+- Chaos file generation (keyboard smash style)
+- Test data generation (CSV, JSON, etc.)
+- Code documentation generation
+- Pattern-based file creation
+- Performance testing utilities
 
 ---
 
 ## Development Timeline
 
-### Phase 1: Foundation (Current - v1.4.x)
-- Stabilize existing tools (CL, HUB, CXT, CBA)
-- Improve documentation and examples
-- Community feedback collection
+### Short-term (Next 2-3 Months)
+1. **CBA Improvements & Bug Fixes**
+   - Refactor folder checking and CMake generation
+   - Add .config file support
+   - Improve error handling and user feedback
 
-### Phase 2: Ecosystem Expansion (v1.5.0 - v1.7.0)
-1. **v1.5.0**: CL Package Manager (CPM)
-2. **v1.6.0**: Configuration Manager (CMNGR)
-3. **v1.7.0**: Unit Testing Framework (CUTEST)
+2. **CL Overhaul**
+   - Enhance command parsing and execution
+   - Add more built-in commands
+   - Improve help system and documentation
 
-### Phase 3: Advanced Tooling (v1.8.0 - v2.0.0)
-1. **v1.8.0**: Document Generator (CDOCGEN)
-2. **v2.0.0**: File Manager (CFM)
+### Medium-term (3-6 Months)
+1. **CBA Out of Beta**
+   - Full integration with HUB
+   - Enhanced configuration options
+   - Cross-platform compatibility improvements
 
-### Phase 4: Integration & Polish (Post-v2.0.0)
-- IDE integrations
-- Cloud services
-- Advanced analytics
-- Plugin system
+2. **CL Package Manager Foundation**
+   - Basic package installation system
+   - Local package management
+   - Integration with existing tools
+
+### Long-term (6+ Months)
+1. **CUTEST Development**
+   - Test framework implementation
+   - Integration with CBA
+   - Documentation and examples
+
+2. **Configuration Manager**
+   - Unified configuration system
+   - Tool integration
+   - Migration utilities
+
+3. **File Manager & Document Generator**
+   - Advanced file operations
+   - Project analysis tools
+   - Various document generation capabilities
 
 ---
 
-## Technical Considerations
+## Current Focus Areas
 
-### Cross-Platform Compatibility
-- Windows (primary target)
-- Linux/macOS support
-- Consistent behavior across platforms
+### Immediate Tasks (v1.2.x)
+- **CBA Refactoring:** Fix folder checking issues and improve CMake generation
+- **Documentation:** Update all README files and changelogs
+- **Installer Updates:** Ensure installer includes all necessary files
+- **Bug Fixes:** Address issues in lookForRootFiles.c and cba.c
 
-### Performance Requirements
-- Minimal memory footprint
-- Fast startup times
-- Efficient algorithm selection
+### Next Release (v1.3.0)
+- Enhanced CBA functionality with .config file support
+- Improved CL command structure
+- Better error handling and user feedback
+- More comprehensive documentation
 
-### Security Considerations
-- Package verification
-- Secure configuration storage
-- Input validation
-- Safe file operations
+---
 
-### Extensibility
-- Plugin architecture for future extensions
-- API for third-party integrations
-- Configuration-based customization
+## Notes
+- **Weekly Development Goal:** Add a new tool or major update each week
+- **Cross-Platform:** Focus on Windows compatibility with eventual Linux/Mac support
+- **Community Input:** Features may change based on user feedback and needs
+- **Learning Focus:** The project serves as a learning experience in C development
 
 ---
 
 ## Success Metrics
-
-### For Each Component
-1. **Adoption Rate**: Number of developers using the tool
-2. **Performance**: Execution time and memory usage benchmarks
-3. **Reliability**: Test coverage and bug report frequency
-4. **Developer Satisfaction**: Feedback and feature request analysis
-
-### Overall Project Goals
-- Reduce C project setup time by 70%
-- Increase code quality through better tooling
-- Create a cohesive ecosystem for C development
-- Foster community contributions and extensions
+- Reduce project setup time for C developers
+- Provide useful tools that integrate well together
+- Maintain clean, readable, and maintainable code
+- Support both novice and experienced C developers
 
 ---
 
-## Contributing to the Roadmap
-
-### How to Get Involved
-1. **Feedback**: Share your use cases and pain points
-2. **Prototyping**: Experiment with early implementations
-3. **Documentation**: Help improve guides and examples
-4. **Testing**: Provide real-world testing scenarios
-
-### Priority Adjustments
-This roadmap is flexible and will adapt based on:
-- Community feedback and voting
-- Technological advancements
-- Resource availability
-- Emerging development trends
-
----
-
-*Last Updated: [Current Date]  
-Roadmap Version: 1.0  
-Maintainer: [Your Name/Team]*
-
-*Note: This roadmap is subject to change based on project needs and community feedback. Features may be reprioritized, added, or removed as development progresses.*
+*Last updated: 2026-02-09*  
+*Author: Nahum Naranjo*  
+*Project Status: Active Development*

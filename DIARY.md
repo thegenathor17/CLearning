@@ -111,5 +111,6 @@ As i worked in the documentation (not much of a deal, it's the boring part) i no
 
 I honestly didn't what to write to the ROADMAP.md so i just started to imagine the whole project and write it down, maybe that's how it words. It might be it, i think im done for today, its 6 o'clock and im hungry, see ya later! (it's been 3 hours of work now D:)
 
-## 1.2 minor updates
-### 1.2.1
+## 1.1 minor updates
+### 1.1.1
+I just updated and improved all documentation and fixed some bugs
