@@ -1,10 +1,10 @@
 #include "lookForRootFiles.h"
 #include <string.h>
 
-FILE* lookForRootFiles(char* filename){
+FILE* lookForRootFiles(char* filename, char* type){
     char path[1024];
     snprintf(path, sizeof(path), "C:\\InCGames\\CL\\%s", filename);
-    FILE *fp = fopen(path, "r");
+    FILE *fp = fopen(path, type);
     if(fp == NULL){
         return NULL;
     }

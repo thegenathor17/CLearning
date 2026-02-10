@@ -13,11 +13,11 @@ void* Build(){
         char cwd[1024];
         GetCurrentDirectoryA(1024, cwd);
         printf("%s\n", cwd);
-        printf("Do you want to run that command? [Y] [N]\n");
+        printf("Do you want to run \"prepare\" command? [Y] [N]\n");
         scanf("%s", option);
         if(strcmp(option, "Y") == 0 || strcmp(option, "y") == 0){
             printf("Preparing build environment...\n");
-            fp = lookForRootFiles("configs\\cba.build");
+            fp = lookForRootFiles("configs\\cba.build", "r");
             Parser(fp, &buildInfo);
             prepare(&buildInfo);
             printf("Build environment prepared.\n");
@@ -141,7 +141,8 @@ void prepare(BuildInfo* buildInfo){
             strcmp(dirArray[i], "configs") == 0 ||
             strcmp(dirArray[i], "docs") == 0 ||
             strcmp(dirArray[i], "tests") == 0 ||
-            strcmp(dirArray[i], ".cbaignore") == 0
+            strcmp(dirArray[i], ".cbaignore") == 0 ||
+            strcmp(dirArray[i], "public") == 0
         ) continue;
         //prepares CMakeLists.txt in each subdirectory
         // common folder is treated differently
@@ -168,4 +169,30 @@ void prepare(BuildInfo* buildInfo){
 
         fclose(fp);
     }
+
+    // Generate build files
+    system("cmake -B build -G Ninja");
+
+    FILE *configFile = lookForRootFiles("configs\\cba.config", "rb");
+    if(configFile == NULL){
+        printf("Error: Could not open cba.config file.\n");
+        return;
+    }
+    FILE *outputFile = fopen("cba.build", "wb");
+    if(outputFile == NULL){
+        printf("Error: Could not create cba.build file.\n");
+        return;
+    }
+    char configLine[256];
+    while (fgets(configLine, sizeof(configLine), configFile)) {
+        // Remove newline
+        configLine[strcspn(configLine, "\n")] = 0;
+        
+        // Skip empty lines/comments
+        if (configLine[0] == '\0' || configLine[0] == '#') continue;
+
+        fprintf(outputFile, "%s\n", configLine);
+    }
+    fclose(configFile);
+    fclose(outputFile);
 }

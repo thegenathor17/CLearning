@@ -93,6 +93,13 @@ Run HUB directly:
 ./build/hub.exe
 ```
 
+Or:
+```bash
+  cl exec hub
+  # Or
+  cl -e hub
+```
+
 ### Menu Options
 
 #### Option 1: Go to CXT
@@ -105,10 +112,20 @@ Launches the CXT text analysis tool.
 Going to CXT...
 ```
 
-#### Option 2: Exit
-Closes the HUB program.
+#### Option 3: Exit
+Launches the CBA build helper.
 
 **Selection:** Enter `2` at the menu prompt.
+
+**Output:**
+```
+Going to CBA...
+```
+
+#### Option 3: Exit
+Closes the HUB program.
+
+**Selection:** Enter `3` at the menu prompt.
 
 **Output:**
 ```
@@ -133,6 +150,16 @@ CXT is a comprehensive text analysis tool that provides various statistics about
 Run CXT directly:
 ```bash
 ./build/cxt.exe
+```
+Or use: 
+```bash
+  cl exec cxt
+  # Or
+  cl -e cxt
+
+  # Or, if you're in the HUB, use:
+  1
+  # And that's it
 ```
 
 ### Main Menu Commands
@@ -329,7 +356,7 @@ analysis> exit
 exit
 ```
 
-### Direct CXT Usage
+### Direct CXT Usage (TODO)
 ```bash
 # Run CXT directly
 ./build/cxt.exe
@@ -344,6 +371,93 @@ analysis> exit
 exit
 ```
 
+## CBA - Auto build helper
+CBA writes and does everythin you need to build your C project, I know it's a headache sometimes
+
+### Usage
+Same as others, you can access it via HUB, direct path or cl command line.
+
+### Commands
+**Build**  
+When you're in the root file of your project and executing CBA, run:
+```bash
+  build
+```
+**Output**  
+if you don't have a cba.build file, it'll return:
+```bash
+  Error: Could not open build file.
+  Current working directory: (current directory)
+  Do you want to run "prepare" command? [Y] [N]
+  # If yes
+  Y
+  Preparing build environment...
+  Build environment prepared.
+  # If not
+  N
+  Exiting...
+```
+However, if you do have a proper cba.build file, it'll just build the project
+
+**Preapare**  
+When you're in your project's root folder and executing cba, run:
+```bash
+  prepare
+``` 
+It'll generate tons of CMakelists.txt and a cba.build file
+
+**Help (TODO)**  
+
+**Exit**
+Exits the program.
+```bash
+  exit
+``` 
+
+**Output**
+```
+  Exiting...
+``` 
+
+### Recommended (Supported) project structures
+First of all, **CBA will ignore any folders with the following names:**  
+"build", ".git", ".vscode", ".github", ".idea", "configs", "docs", "tests", ".cbaignore", "public"  
+You can put everything you need there.
+
+**1. ```/Common``` libraries**
+```
+├── src/                  # Source files (only .c and .h supported, will  
+|                         # generate a CMakeLists.txt for this one too)
+├── public/               # Public assets
+├── test/                 # Automated tests
+├── common/               # All your libraries (alternatively libraries)
+├── cba.build             # Will be automatically generated
+└── CMakelists.cxt        # Will be automatically generated
+```
+
+### Examples
+### Complete CL Workflow
+```bash
+# Show help
+cl --help
+
+# Execute HUB
+cl exec hub
+
+# In HUB menu, select 2 for CBA
+2
+
+# In CBA
+# Generate a cba.build file based on your configs
+prepare
+
+# Build your project
+build
+
+# Exit CBA
+exit
+```
+
 ## Notes
 
 - All tools are designed for Windows console environment
@@ -351,3 +465,6 @@ exit
 - Text analysis performs basic cleaning (removes punctuation, handles quotes)
 - Memory usage scales with file size for word frequency tracking
 - Reports can be reloaded for viewing without re-analysis
+- Configs are not modfiable for the moment
+- CBA is in still in early development, please be patient
+- this one is just to make the file 470 lines long :D

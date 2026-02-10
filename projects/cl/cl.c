@@ -5,14 +5,14 @@
 void interpreter(int argc, char** argv){
     // Version info
     if(argc == 1){
-        printf("CL version 1.0.0. Author: Nahum Naranjo \n");
+        printf("CL version 1.1.1. Author: Nahum Naranjo \n");
         return;
     }
     if(argv[1] == NULL){
         return;
     }
     if (argv[1] != NULL && (strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "--version") == 0)) {
-        printf("CL version 1.0.0. Author: Nahum Naranjo \n");
+        printf("CL version 1.1.1. Author: Nahum Naranjo \n");
         return;
     }
 

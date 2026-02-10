@@ -3,6 +3,6 @@
     #include <stdio.h>
     #include <windows.h>
     #include <stdlib.h>
-    FILE* lookForRootFiles(char* filename);
+    FILE* lookForRootFiles(char* filename, char* type);
     char* ListDirectories(char* directory);
 #endif

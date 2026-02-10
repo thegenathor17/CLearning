@@ -1,6 +1,7 @@
 # Dev Diary :D  
 ## Introduction
 Here, I'll narrate every single problem/curious thing that happened during the development of this project, just so I can read it and laugh at myself in the future (I hope near future D:).  
+
 ## 1.0.0 realease  
 I actually never really worked with all these new tools before (Inno setup, C itself, cmake, etc...) but i really enjoyed the experience, it was very challenging to learn a new coding language (And specially if it is C) with a project instead of a class but it was rewarding. One of the biggest challenges I had during the development of this project (specially cxt) was learning about pointers and strings with c, it might be one of the hardest things to dominate out there, if it wasn't because of google this project might be dead, I can't imagine how people used to code without the beauty of learning through a search engine.  
 
@@ -81,6 +82,34 @@ if the directory name is "common", then cba will make this CMakelists.txt:
     set_target_properties(common PROPERTIES C_STANDARD 11)
 ```
 
-And that's it, now the user should be able to run either "ninja", "cmake .." or "cba build" to get the .exe's
+And that's it, now the user should be able to run either "ninja", "cmake .." or "cba build" (prefirably cba build because it rechecks everything) to get the .exe's
 
-For now and due to my lack of experience with cmake, it'll be based completely on my files so it won't have that much of compatibility but it'll improve with time. This was an easy tool to develop tbh, see you tomorrow!
+For now and due to my lack of experience with cmake, it'll be based completely on my files so it won't have that much of compatibility but it'll improve with time. This was an easy tool to develop tbh, I was hoping to find problems.
+
+## 1.2.0
+(yeah, i forgot last realease was 1.1 and put a 1.2 the whole time)  
+For this version i want to:
+- **Refactor CBA** due to some issues i saw during the weekend on folder checking and adding it's documentation and changelog
+- Finally work with **CL and do a major overhaul** of it's functionalities
+- Take **CBA out of beta** and add it to the hub so it has an easier access
+- Finally use **.config files** added in last update.
+
+Also, i'm gonna change the format of this markdown file, now it'll have different sections for the different plans for the major realease and other sections for minor patches or updates. Last format was way too chaotic.
+
+Another anouncement, i'm trying to add a new tool/major update each week so stay tuned!
+
+### CBA refactorization
+
+### CL Overhaul
+
+### Doc works
+For today (09/02/26), I'll be working on this, changelog, roadmap and all project md's must be outdated and kinda weird because i wrote them in a rush. Also, curious thing of the day, linux had over 10 thousand lines of code, 5.9k of ANSI C, 2.5k of C headers and 1.4k lines of i386 assembler (goated cpu btw).
+
+To start the day, I read a [github article](https://github.com/resources/articles/tools-and-techniques-for-effective-code-documentation), it wasn't that useful tbh.
+
+As i worked in the documentation (not much of a deal, it's the boring part) i noticed i haven't been updating the installer in a while, i just runned "iscc [filepath]" and didn't notice i still had to run "ninja" on my project so all versions before 1.1.0 are the exact same 1.0.0. Also, i had a few problems with lookForRootFiles.c and cba.c so i fixed them, nothing much, just design problems. I assumed i'd always need to normally read the file but now i know i didn't, prepare uses "rb" and build uses "r" so I just added a new param to lookForRootFiles() so i can just stick it into the fopen().   
+
+I honestly didn't what to write to the ROADMAP.md so i just started to imagine the whole project and write it down, maybe that's how it words. It might be it, i think im done for today, its 6 o'clock and im hungry, see ya later! (it's been 3 hours of work now D:)
+
+## 1.2 minor updates
+### 1.2.1

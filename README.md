@@ -11,6 +11,7 @@ The project is organized into the following components:
 - **[CL](projects/cl/README.md)**: A command-line tool launcher that allows executing different utilities.
 - **[HUB](projects/hub/README.md)**: A simple menu interface to access available tools.
 - **[CXT](projects/cxt/README.md)**: A text analysis tool that counts words, frequencies, and generates reports.
+- **[CBA](projects/cba/README.md)**: A build helper
 
 ### Common Library
 
@@ -20,11 +21,14 @@ The project is organized into the following components:
 
 - **C Compiler**: GCC (MinGW recommended on Windows) or C11 compatible.
 - **CMake**: Version 3.10 or higher for project building.
-- **Ninja**: Optional but recommended build generator.
+- **Ninja**: Completely required due to being the only one CBA supports for the moment.
 - **Operating System**: Windows compatible (tested on Windows with MinGW).
 
 ## Building and Installation
+### Easy way
+Download the installer and run it, it'll install the program to path. You may have problems with windows defender due to me not wanting to give my soul to microsoft in exchange of .exe's recognition. Sorry D:
 
+### Hard way
 1. **Clone or download** the repository to your local machine.
 
 2. **Navigate to the project root directory**:
@@ -54,6 +58,7 @@ This will generate the executables in the corresponding directories:
 - `build/cl.exe`
 - `build/hub.exe`
 - `build/cxt.exe`
+- `build/cba.exe`
 
 ## Usage
 
@@ -97,7 +102,7 @@ Developed by Nahum Naranjo as part of a C learning project.
 
 ## Version
 
-CLEARNING v1.0.0
+CLEARNING v1.1.0
 
 See [CHANGELOG.md](CHANGELOG.md) for detailed feature list and changes.</content>
 <parameter name="filePath">d:\Programacion\CLearning\README.md
