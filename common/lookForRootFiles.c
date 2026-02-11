@@ -11,6 +11,10 @@ FILE* lookForRootFiles(char* filename, char* type){
     return fp; // caller must close
 }
 
+char* rootFilePath(){
+    return "C:\\InCGames\\CL\\";
+}
+
 char* ListDirectories(char* directory){
     char path[1024];
     strncpy(path, directory, sizeof(path)-4);

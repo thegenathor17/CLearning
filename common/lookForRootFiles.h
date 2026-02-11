@@ -5,4 +5,5 @@
     #include <stdlib.h>
     FILE* lookForRootFiles(char* filename, char* type);
     char* ListDirectories(char* directory);
+    char* rootFilePath();
 #endif

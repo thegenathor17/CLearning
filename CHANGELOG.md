@@ -2,8 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to a comnination of [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Calendar Versioning](https://calver.org). Using the same principles as SemVer but changing minor updates to weekly (can be exceptions) drops of content.
 
 ## [1.0.0] - 2026-02-03
 
@@ -126,5 +125,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Usual DIARY.md entries  
 - Made some hotfixes
 
+## [1.1.2] - 2026-02-10
 ### Author
 - Developed by Nahum Naranjo as a C learning project

@@ -94,11 +94,21 @@ For this version i want to:
 - Take **CBA out of beta** and add it to the hub so it has an easier access
 - Finally use **.config files** added in last update.
 
-Also, i'm gonna change the format of this markdown file, now it'll have different sections for the different plans for the major realease and other sections for minor patches or updates. Last format was way too chaotic.
+Also, i'm gonna change the format of this markdown file, now it'll have different sections for the different plans for the minor realease and other sections for patches or updates.  
+Last format was way too chaotic.  
+**(After afinating)**
+I came to this new versioning protocol. I upload a daily patch and a weekly drop of a new tool (this one being cba) so the new versioning will be:  
+major.weeklyDrop.dailyPatch (so don't be surprised if we're in 1.39.4 in a near future)
 
-Another anouncement, i'm trying to add a new tool/major update each week so stay tuned!
+Another anouncement, i'm trying to add a new tool/minor update each week so stay tuned!
 
-### CBA refactorization
+### CBA refactorization  
+I'm tired today so let's work with this, it's way simpler and easier so i hope i finish quick. After a quick check on the code, i noticed i could let the user build their own structure and have some defaults instead of directly doing it all by myself.  
+
+For now, I've been working more on the interpreter than actual refactoring the code, all it's flaws are perfectly corregible by just doing a good work with the interpreter and cl. For now, im pretty sure it's gonna be easy.  
+
+I've been learning a lot these few weeks i've had this project, fr i think c is the greatest language to ever exist, i can do whatever i want however i want and the computer will do exactly that, almost no rules, almost nothing to do but code and learn a lot, specially when it comes to string functions, coming from high level languages it's way different but way funnier this way (and more efficient, i guess). Also, memory managment is not that bad as people say, it's like dude, just keep track of what you're doing and that's it. I wanna be a C programmer (embedded engineering calling) someday.  
+
 
 ### CL Overhaul
 
@@ -111,6 +121,8 @@ As i worked in the documentation (not much of a deal, it's the boring part) i no
 
 I honestly didn't what to write to the ROADMAP.md so i just started to imagine the whole project and write it down, maybe that's how it words. It might be it, i think im done for today, its 6 o'clock and im hungry, see ya later! (it's been 3 hours of work now D:)
 
-## 1.1 minor updates
+## 1.1 minor updates/patches
 ### 1.1.1
-I just updated and improved all documentation and fixed some bugs
+I just updated and improved all documentation and fixed some logic problems i noticed in lookForFiles.c and cba.c
+
+### 1.1.2

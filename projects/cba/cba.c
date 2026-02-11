@@ -32,7 +32,7 @@ void* Build(){
 }
 
 
-void Parser(FILE* file, BuildInfo* buildInfo) {
+char* BuildParser(FILE* file, BuildInfo* buildInfo) {
     char line[256];
     
     while (fgets(line, sizeof(line), file)) {
@@ -68,26 +68,6 @@ void Parser(FILE* file, BuildInfo* buildInfo) {
         }
     }
 }
-
-char* trimWhitespace(char* str) {
-    char* end;
-
-    // Trim leading space
-    while(isspace((unsigned char)*str)) str++;
-
-    if(*str == 0)  // All spaces?
-        return str;
-
-    // Trim trailing space
-    end = str + strlen(str) - 1;
-    while(end > str && isspace((unsigned char)*end)) end--;
-
-    // Write new null terminator
-    *(end+1) = 0;
-
-    return str;
-}
-
 
 void prepare(BuildInfo* buildInfo){
     if(system("cmake --version > /dev/null 2>&1") != 0){
@@ -172,7 +152,13 @@ void prepare(BuildInfo* buildInfo){
 
     // Generate build files
     system("cmake -B build -G Ninja");
+}
 
+void clean(){
+    system("rd /s /q build");
+}
+
+void generateFiles(){
     FILE *configFile = lookForRootFiles("configs\\cba.config", "rb");
     if(configFile == NULL){
         printf("Error: Could not open cba.config file.\n");

@@ -6,6 +6,7 @@
     #include <windows.h>
     #include <string.h>
     #include <lookForRootFiles.h>
+    #include <stringManipulation.h>
 
     typedef struct {
         char version[50];
@@ -19,5 +20,7 @@
     void prepare(BuildInfo* buildInfo);
     void Parser(FILE* file, BuildInfo* buildInfo);
     char* trimWhitespace(char* str);
+    void clean();
+    void generateFiles();
     
 #endif
