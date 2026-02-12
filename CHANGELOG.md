@@ -126,5 +126,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Made some hotfixes
 
 ## [1.1.2] - 2026-02-10
+### Libraries
+- Added rootFilePath()
+- Modified lookForRootFiles()
+
+## [1.1.2] - 2026-02-11
+### InnoSetup
+- Added cba and cl to path instead of all .exe's
+- Added cba in general
+
+### hotfixes
+- Minor bugfixes
+- Added CBA to hub
+
 ### Author
 - Developed by Nahum Naranjo as a C learning project

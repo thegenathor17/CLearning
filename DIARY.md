@@ -111,6 +111,7 @@ I've been learning a lot these few weeks i've had this project, fr i think c is 
 
 
 ### CL Overhaul
+It's already late today so i'm gonna try to rush it, even though it's wednesday, i might be a bit short on time already. Curious thing of the day, my family calls me alex beacause it's my middle name but every other person calls me nahum, a bit useless today but it's better than nothing.
 
 ### Doc works
 For today (09/02/26), I'll be working on this, changelog, roadmap and all project md's must be outdated and kinda weird because i wrote them in a rush. Also, curious thing of the day, linux had over 10 thousand lines of code, 5.9k of ANSI C, 2.5k of C headers and 1.4k lines of i386 assembler (goated cpu btw).

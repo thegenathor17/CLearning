@@ -18,7 +18,7 @@
 
     void* Build();
     void prepare(BuildInfo* buildInfo);
-    void Parser(FILE* file, BuildInfo* buildInfo);
+    void BuildParser(FILE* file, BuildInfo* buildInfo);
     char* trimWhitespace(char* str);
     void clean();
     void generateFiles();

@@ -3,15 +3,15 @@
 #include <screenManagment.h>
 
 
-int main(){
+int main(int argc, char** argv){
     clearConsole();
     printf("Welcome to CBA!\n");
-    void* ptrToOption = NULL;
+    char* ptrToOption = NULL;
     while(ptrToOption != 0){
         // Main loop
         ptrToOption = BuildUI();
         clearConsole();
-        if(strstr(ptrToOption, "build") != NULL){
+        if(strstr(*ptrToOption, "build") != NULL){
             printf("Building CBA...\n");
             Build();
             Stop();

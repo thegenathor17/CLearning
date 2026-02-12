@@ -5,14 +5,14 @@
 void interpreter(int argc, char** argv){
     // Version info
     if(argc == 1){
-        printf("CL version 1.1.1. Author: Nahum Naranjo \n");
+        printf("CL version 1.1.3. Author: Nahum Naranjo \n");
         return;
     }
     if(argv[1] == NULL){
         return;
     }
     if (argv[1] != NULL && (strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "--version") == 0)) {
-        printf("CL version 1.1.1. Author: Nahum Naranjo \n");
+        printf("CL version 1.1.3. Author: Nahum Naranjo \n");
         return;
     }
 
@@ -43,6 +43,10 @@ void interpreter(int argc, char** argv){
         if(strcmp(argv[2], "cxt") == 0){
             printf("Executing CXT...");
             system("cxt.exe");
+        }
+        if(strcmp(argv[2], "cba") == 0){
+            printf("Executing CBA...");
+            system("cba.exe");
         }
         return;
     }

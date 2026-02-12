@@ -9,5 +9,8 @@
     #include <screenManagment.h>
     #include <windows.h>
     #include <stdbool.h>
-    void* BuildUI();
+    char* BuildUI();
+    void config(char type);
+    void Help();
+    void writeConfigFile(char* path);
 #endif

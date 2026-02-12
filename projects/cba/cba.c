@@ -18,7 +18,7 @@ void* Build(){
         if(strcmp(option, "Y") == 0 || strcmp(option, "y") == 0){
             printf("Preparing build environment...\n");
             fp = lookForRootFiles("configs\\cba.build", "r");
-            Parser(fp, &buildInfo);
+            BuildParser(fp, &buildInfo);
             prepare(&buildInfo);
             printf("Build environment prepared.\n");
             return NULL;
@@ -28,11 +28,11 @@ void* Build(){
         return NULL;
     }
     // read line by line
-    Parser(fp, &buildInfo);
+    BuildParser(fp, &buildInfo);
 }
 
 
-char* BuildParser(FILE* file, BuildInfo* buildInfo) {
+void BuildParser(FILE* file, BuildInfo* buildInfo) {
     char line[256];
     
     while (fgets(line, sizeof(line), file)) {

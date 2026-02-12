@@ -71,6 +71,7 @@ lib/
 *.user
 *.userosscache
 *.sln.docstates
+.VSCodeCounter
 
 # Temporary files
 *.tmp

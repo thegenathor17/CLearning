@@ -20,8 +20,8 @@ Run the CL installer, this dependencie does not have a separate repository yet.
 
 ## Dependencies
 
-- **CMake**: It's the standard build scripting tool.
-- **Ninja**: It's the default build system.
+- **CMake 3.10**: It's the standard build scripting tool.
+- **Ninja 1.10.0**: It's the default build system.
 
 ## File Structure
 
