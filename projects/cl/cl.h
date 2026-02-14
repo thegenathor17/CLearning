@@ -1,5 +1,9 @@
 #ifndef CL_H
 #define CL_H
     #include <stdio.h>
+    #include <string.h>
+    #include <stdlib.h>
+    #include "cxt.h"
+    #include "cba.h"
     void interpreter(int argc, char** argv);
 #endif // CL_H

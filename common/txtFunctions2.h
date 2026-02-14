@@ -1,5 +1,5 @@
-#ifndef TXTFUNCTIONS_H
-#define TXTFUNCTIONS_H
+#ifndef txtFUNCTIONS2_H
+#define txtFUNCTIONS2_H
     #include <stdio.h>
     #include <string.h>
     #include <stdbool.h>

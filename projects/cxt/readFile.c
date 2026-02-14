@@ -1,6 +1,5 @@
 #include "readFile.h"
-#include <stdio.h>
-#include <stdlib.h>
+
 
 void* separateFiles(const char *file, size_t *size_out){
     if(!file) return NULL;

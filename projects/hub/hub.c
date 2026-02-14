@@ -15,6 +15,10 @@ void interpreter(void){
             system("cxt.exe");
         }
         else if(strcmp(option, "2") == 0){
+            printf("Going to CBA...");
+            system("cba.exe");
+        }
+        else if(strcmp(option, "3") == 0){
             printf("Exiting...");
             return;
         }

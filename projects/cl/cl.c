@@ -1,18 +1,17 @@
 #include "cl.h"
-#include <string.h>
-#include <stdlib.h>
+#include "map.h"
 
 void interpreter(int argc, char** argv){
     // Version info
     if(argc == 1){
-        printf("CL version 1.1.3. Author: Nahum Naranjo \n");
+        printf("CL version 1.2.0. Author: Nahum Naranjo \n");
         return;
     }
     if(argv[1] == NULL){
         return;
     }
     if (argv[1] != NULL && (strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "--version") == 0)) {
-        printf("CL version 1.1.3. Author: Nahum Naranjo \n");
+        printf("CL version 1.2.0. Author: Nahum Naranjo \n");
         return;
     }
 
@@ -26,9 +25,91 @@ void interpreter(int argc, char** argv){
         printf("  exec, -e            Execute a tool, usage: \"cl exec [toolName]\" (also works with hub)\n");
         return;
     }
-
+    bool hasPassed = false;
     // Exec
-    if(argv[1] != NULL && (strcmp(argv[1], "exec") == 0 || strcmp(argv[1], "-e") == 0)){
+    if((strcmp(argv[1], "exec") == 0 || strcmp(argv[1], "-e") == 0)){
+        // Executing specific commands from cl
+        if(argv[2] == "cxt"){
+            printf("Hello");
+            Stop();
+            hasPassed = true;
+            char* path = argv[3];
+            char* inst = argv[4];
+            size_t* size;
+            AnalyzeTextData* data = AnalyzeText(&path, size);
+            if(data == NULL) printf("Something went wrong while readint the file");
+            if(path != NULL){
+                // Write
+                if(strcmp(inst, "write") == 0){
+                    path = getFilePath();
+                    writeFile(path, data);
+                    printf("Your analysis has been written to %s\n", path);
+                }
+                // Info options
+                if(strcmp(inst, "info") == 0){
+                    char* spec = argv[5];
+                    if(strcmp(spec, "-a")){
+                        printf("Number of lines: %i\n", *data->newLines);
+                        printf("Number of words: %i\n", *data->words);
+                        printf("Most common word: %s\n", data->mostUsed);
+                        printf("All word frequencies:\n");
+                        for(size_t i = 0; i < data->uniqueWords; i++){
+                            printf("Word: %s - Frequency: %i\n", data->tracker[i].key, data->tracker[i].timesAppeared);
+                        }
+                    }
+                    if(strcmp(spec, "-l") == 0){
+                        printf("Number of lines: %i\n", *data->newLines);
+                    }
+                    if(strcmp(spec, "-w") == 0){
+                        printf("Number of words: %i\n", *data->words);
+                    }
+                    if(strcmp(spec, "-f") == 0){
+                        printf("All word frequencies:\n");
+                        for(size_t i = 0; i < data->uniqueWords; i++){
+                            printf("Word: %s - Frequency: %i\n", data->tracker[i].key, data->tracker[i].timesAppeared);
+                        }
+                    }
+                    if(strcmp(spec, "m") == 0){
+                        printf("Most common word: %s\n", data->mostUsed);
+                    }
+                }
+                if(inst == NULL){
+                    analysisMode(NULL, size, data);
+                }
+            }
+            hasPassed = true;
+        }
+        if(strcmp(argv[2], "cba") == 0){
+            char* inst = argv[3];
+            if(strcmp(inst, "build")){
+                Build();
+            }
+            if(strcmp(inst, "prepare")){
+                printf("Preparing...\n");
+                BuildInfo* build;
+                FILE* fp = lookForRootFiles("\\configs\\cba.config", "r");
+                BuildParser(fp, build);
+                prepare(build);
+                printf("Your files are ready to use\n");
+            }
+            if(strcmp(inst, "generate") == 0 ||strcmp(inst, "-g") == 0){
+                printf("Generating...\n");
+                generateFiles();
+                printf("Done!");
+            }
+        }
+        hasPassed = true;
+        // Direct exec
+        if(strcmp(argv[2], "1") == 0){
+            hasPassed = true;
+            system("cxt.exe");
+        }
+        if(strcmp(argv[2], "2") == 0){
+            hasPassed = true;
+            system("cba.exe");
+        }
+    }
+    if(argv[1] != NULL && (strcmp(argv[1], "exec") == 0 || strcmp(argv[1], "-e") == 0) && !hasPassed){
         if(argv[2] != NULL){
             printf("Interpreting tool: %s\n", argv[2]);        
         } 
@@ -50,6 +131,8 @@ void interpreter(int argc, char** argv){
         }
         return;
     }
+    
+
     // Unknown option
     // TODO: Add cl install to install libraries to projects
     // TODO: Add cba to build CBA projects

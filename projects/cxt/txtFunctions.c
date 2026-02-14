@@ -1,6 +1,6 @@
 #include "txtFunctions.h"
-#include <string.h>
-#include <stdlib.h>
+#include <txtFunctions2.h>
+
 
 const char delim[] = " ";
 const char *stop_words[] = {

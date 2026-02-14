@@ -57,7 +57,6 @@ void analysisMode(char* txt, size_t* size, AnalyzeTextData* dataOut){
     }
     while(1){
             clearConsole();
-            
             ptrToOption = HelpUI();
             if(strcmp(ptrToOption, "exit") == 0 || strcmp(ptrToOption, "Exit") == 0) {printf("Exiting analysis mode.\n"); clearConsole(); break;}
             if(strcmp(ptrToOption, "help") == 0 || strcmp(ptrToOption, "Help") == 0) {Help(); continue;}

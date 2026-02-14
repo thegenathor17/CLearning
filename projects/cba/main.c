@@ -11,7 +11,7 @@ int main(int argc, char** argv){
         // Main loop
         ptrToOption = BuildUI();
         clearConsole();
-        if(strstr(*ptrToOption, "build") != NULL){
+        if(strstr(ptrToOption, "build") != NULL){
             printf("Building CBA...\n");
             Build();
             Stop();

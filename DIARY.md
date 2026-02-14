@@ -102,7 +102,7 @@ major.weeklyDrop.dailyPatch (so don't be surprised if we're in 1.39.4 in a near 
 
 Another anouncement, i'm trying to add a new tool/minor update each week so stay tuned!
 
-### CBA refactorization  
+### CBA refactorization  //Postponed to 1.3
 I'm tired today so let's work with this, it's way simpler and easier so i hope i finish quick. After a quick check on the code, i noticed i could let the user build their own structure and have some defaults instead of directly doing it all by myself.  
 
 For now, I've been working more on the interpreter than actual refactoring the code, all it's flaws are perfectly corregible by just doing a good work with the interpreter and cl. For now, im pretty sure it's gonna be easy.  
@@ -110,10 +110,28 @@ For now, I've been working more on the interpreter than actual refactoring the c
 I've been learning a lot these few weeks i've had this project, fr i think c is the greatest language to ever exist, i can do whatever i want however i want and the computer will do exactly that, almost no rules, almost nothing to do but code and learn a lot, specially when it comes to string functions, coming from high level languages it's way different but way funnier this way (and more efficient, i guess). Also, memory managment is not that bad as people say, it's like dude, just keep track of what you're doing and that's it. I wanna be a C programmer (embedded engineering calling) someday.  
 
 
-### CL Overhaul
+### CL Overhaul //done as of 13-02-26
 It's already late today so i'm gonna try to rush it, even though it's wednesday, i might be a bit short on time already. Curious thing of the day, my family calls me alex beacause it's my middle name but every other person calls me nahum, a bit useless today but it's better than nothing.
 
-### Doc works
+For the first thing to do is to unify all CL's commands into cl.c so the user can write something like:  
+```bash
+    cl exec cxt "C:\Absolute\Path" write && cl -e cxt "C:\Report\File" info -a 
+    ## OR
+    cl exec cba prepare
+
+    ## I wanna make clear, cba is also added to path so you can just
+    cba prepare || cba build
+```
+
+Also, i wanna work on the exec command so you can skip hub.c and do:
+```bash
+    cl exec 1 ## And execute cxt
+    cl exec 2 ## And execute cba ui
+```
+
+this'll gonna be a bit harder but it's ok, i have plenty of time (i have about 2 hours before having to upload this week's drop)
+
+### Doc works //Done as of 09-02-26
 For today (09/02/26), I'll be working on this, changelog, roadmap and all project md's must be outdated and kinda weird because i wrote them in a rush. Also, curious thing of the day, linux had over 10 thousand lines of code, 5.9k of ANSI C, 2.5k of C headers and 1.4k lines of i386 assembler (goated cpu btw).
 
 To start the day, I read a [github article](https://github.com/resources/articles/tools-and-techniques-for-effective-code-documentation), it wasn't that useful tbh.
@@ -127,3 +145,6 @@ I honestly didn't what to write to the ROADMAP.md so i just started to imagine t
 I just updated and improved all documentation and fixed some logic problems i noticed in lookForFiles.c and cba.c
 
 ### 1.1.2
+Didn't do much tbh
+
+### 1.1.3

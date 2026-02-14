@@ -1,11 +1,11 @@
 #include "ui.h"
 
-// TODO: Add configs while
-
 char* BuildUI(){
-    char input[256];
+    static char input[256];
     printf("CBA Main menu:\n");
-    scanf("%s", input);
+    fgets(input, sizeof(input), stdin);
+    input[strcspn(input, "\n")] = 0;
+    
     // Exit command
     if(strcmp(input, "exit") == 0 || strcmp(input, "Exit") == 0){
         printf("Exiting CBA...\n");
@@ -18,11 +18,10 @@ char* BuildUI(){
         return "0";
     }
     // prepare
-    if( strcmp(input, "generate") == 0 || 
-        strcmp(input, "Generate") == 0 ||
-        strcmp(input, "-g") == 0 ||
-        strcmp(input, "-G") == 0
-    ){
+    if(strcmp(input, "generate") == 0 || 
+       strcmp(input, "Generate") == 0 ||
+       strcmp(input, "-g") == 0 ||
+       strcmp(input, "-G") == 0){
         generateFiles();
         printf("Build files generated. Run \"build\" command to build the project.\n");
         return "0";
@@ -34,50 +33,42 @@ char* BuildUI(){
         return "0";
     }
     // config
-    if((strcmp(input, "config") == 0 || strcmp(input, "Config") == 0) && (strstr(input, "-n") != NULL || strstr(input, "-N") != NULL)){
+    if((strcmp(input, "config") == 0 || strcmp(input, "Config") == 0) && 
+       (strstr(input, "-n") != NULL || strstr(input, "-N") != NULL)){
         printf("Opening config file...\n");
         system("notepad configs\\cba.config");
         return "0";
     }
     else if(strcmp(input, "config") == 0 || strcmp(input, "Config") == 0){
-        config('c');
+        config("c");  // Pass string, not char
         return "0";
     }
 
     // build change
-    if(strcmp(input, "change") == 0 || strcmp(input, "Change") == 0 && strstr(input, "-n") != NULL && strstr(input, "-N") != NULL){
+    if((strcmp(input, "change") == 0 || strcmp(input, "Change") == 0) && 
+       (strstr(input, "-n") != NULL || strstr(input, "-N") != NULL)){
         printf("Changing build configuration...\n");
         system("notepad cba.build");
-        return 0;
+        return "0";
     } else {
-        config('b');
+        config("b");  // Pass string, not char
         return "0";
     }
     printf("Unknown command. Type \"help\" for a list of available commands.\n");
-    return *input;
+    return input;
 }
 
-void config(char type){
-    if(type != 'c' && type != 'b') return;
+void config(char* type){
+    if(strcmp(type, "c") != 0 && strcmp(type, "b") != 0) return;  // Compare strings
     FILE* fp;
-    if(type == 'c'){
-        // Null checkers and declarations
+    if(strcmp(type, "c") == 0){
         BuildInfo buildInfo;
         fp = lookForRootFiles("configs\\cba.config", "r");
-        if(fp == NULL) printf("Error: Could not open cba.config file.\n"); return;
-        char* path[512];
-        if(path == NULL) {
-            printf("Error: Could not allocate memory for path.\n");
+        if(fp == NULL) {
+            printf("Error: Could not open cba.config file.\n"); 
             return;
         }
-        // Construct path to config file
-        strcpy(*path, "type ");
-        strcat(*path, rootFilePath());
-        strcat(*path, "configs\\cba.config");
-
-        // first loop
-        while(true){
-        }
+        // Rest of your config code...
     } else {
         fp = lookForRootFiles("cba.build", "r");
         if(fp == NULL){
@@ -85,18 +76,4 @@ void config(char type){
             return;
         }
     }
-
-}
-
-void Help(){
-    printf("Available commands:\n");
-    printf("build - Builds the project using the generated build files.\n");
-    printf("generate - Generates build files based on the cba.config file.\n");
-    printf("clean - Cleans the build directory.\n");
-    printf("config - Opens the cba.config file for editing.\n");
-    printf("exit - Exits the CBA tool.\n");
-}
-
-void writeConfigFile(char* path){
-    system(path);
 }

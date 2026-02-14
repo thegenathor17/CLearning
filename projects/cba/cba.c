@@ -1,4 +1,5 @@
 #include "cba.h"
+#include <cba2.h>
 
 void* Build(){
     char line[256];
@@ -13,7 +14,7 @@ void* Build(){
         char cwd[1024];
         GetCurrentDirectoryA(1024, cwd);
         printf("%s\n", cwd);
-        printf("Do you want to run \"prepare\" command? [Y] [N]\n");
+        printf("Do you want to run \"prepare\"? [Y] [N]\n");
         scanf("%s", option);
         if(strcmp(option, "Y") == 0 || strcmp(option, "y") == 0){
             printf("Preparing build environment...\n");

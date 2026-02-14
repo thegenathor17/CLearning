@@ -10,7 +10,7 @@
     #include <windows.h>
     #include <stdbool.h>
     char* BuildUI();
-    void config(char type);
+    void config(char* type);
     void Help();
     void writeConfigFile(char* path);
 #endif

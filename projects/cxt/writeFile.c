@@ -1,4 +1,5 @@
 #include "writeFile.h"
+#include <writeFile2.h>
 
 
 bool writeFile(const char* path, AnalyzeTextData* data) {
